@@ -1,0 +1,305 @@
+:root {
+  --bg: #0b0f14;
+  --panel: #141b24;
+  --line: #253141;
+  --accent: #ffd24a;
+  --accent2: #7fd7ff;
+  --text: #e6edf3;
+  --muted: #8b9bb0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(1200px 600px at 50% -10%, #16202c 0%, var(--bg) 55%);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  min-height: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 12px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.title {
+  margin: 4px 0 0;
+  font-size: 22px;
+  letter-spacing: 3px;
+  text-align: center;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(255, 210, 74, 0.35);
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.hud-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 46px;
+}
+
+.hud-item .label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.hud-item .value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.lives,
+.power {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+}
+
+.heart {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(255, 210, 74, 0.6);
+  display: inline-block;
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.pip {
+  width: 14px;
+  height: 8px;
+  border-radius: 2px;
+  background: #2a3644;
+  display: inline-block;
+}
+
+.pip.on {
+  background: var(--accent2);
+  box-shadow: 0 0 8px rgba(127, 215, 255, 0.7);
+}
+
+/* ---------- 舞台 ---------- */
+.stage {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(0, 0, 0, 0.6);
+  background: #05080b;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 10, 14, 0.78);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 20px;
+}
+
+.overlay h2 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  text-shadow: 0 0 18px rgba(255, 210, 74, 0.4);
+}
+
+.overlay .sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.overlay .sub b {
+  color: var(--accent2);
+  font-size: 18px;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: #1b2530;
+  color: var(--text);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover {
+  background: #23303d;
+  border-color: #3a4a5c;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, #ffdd6b, #f5b301);
+  border-color: #c98f00;
+  color: #241a00;
+  padding: 11px 22px;
+  font-size: 15px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.freeze-tip {
+  text-align: center;
+  color: var(--accent2);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* ---------- 触屏 ---------- */
+.touch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 4px;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 54px);
+  grid-template-rows: repeat(3, 54px);
+  gap: 6px;
+}
+
+.dpad .up {
+  grid-area: 1 / 2;
+}
+.dpad .left {
+  grid-area: 2 / 1;
+}
+.dpad .right {
+  grid-area: 2 / 3;
+}
+.dpad .down {
+  grid-area: 3 / 2;
+}
+
+.tbtn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: #1b2530;
+  color: var(--text);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.tbtn:active {
+  background: #2c3a4a;
+}
+
+.tbtn.fire {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 700;
+  background: radial-gradient(circle at 35% 30%, #ff8a5c, #d63a12);
+  border-color: #8f2508;
+  color: #fff;
+}
+
+/* 桌面端隐藏触屏按键 */
+@media (hover: hover) and (pointer: fine) {
+  .touch {
+    display: none;
+  }
+}
+
+/* ---------- 帮助 ---------- */
+.help {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.7;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.help p {
+  margin: 0;
+}
+
+.help .tips {
+  margin-top: 6px;
+  color: #6f8098;
+}
+
+@media (max-width: 420px) {
+  .title {
+    font-size: 18px;
+  }
+  .hud-item .value {
+    font-size: 14px;
+  }
+}
