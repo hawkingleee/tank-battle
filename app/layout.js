@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "坦克大战 · Tank Battle",
+  title: "李欢大战坦克",
   description: "使用 Next.js + Canvas 实现的经典坦克大战游戏",
 };
 
